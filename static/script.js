@@ -17,9 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Function to fetch products (with optional filtering)
 function fetchProducts(selectedCategories = []) {
-    let url = 'http://127.0.0.1:5001/products';
+    let baseURL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+        ? "http://127.0.0.1:5001" // Use local Flask backend
+        : "https://vfm-project.onrender.com"; // Use deployed backend
+
+    let url = `${baseURL}/products`;
 
     // Add query parameters for filtering
     if (selectedCategories.length > 0) {
