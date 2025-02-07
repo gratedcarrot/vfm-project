@@ -1,0 +1,108 @@
+body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+	.hero {
+    	background: url("image1.jpeg") no-repeat center center/cover;
+   	position:relative;
+	height: 100vh;
+    	color: black;
+    	text-align: center;
+    	display: flex;
+    	flex-direction: column;
+    	justify-content: center;
+    	align-items: center;
+    	animation: fadeIn 2s ease-in;
+		}
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: slideInFromLeft 2s ease-in-out;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: slideInFromRight 2s ease-in-out;
+        }
+        .nav-link {
+            color: #fff !important;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: white;
+            bottom: 0;
+            left: -100%;
+            transition: all 0.3s ease-in-out;
+        }
+        .nav-link:hover::before {
+            left: 0;
+	}
+	.features .card {
+            margin: 15px 0;
+            animation: fadeUp 1.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInFromLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideInFromRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+.search-bar-container {
+        position: absolute;
+        top: 50%;
+        left: 40%;
+        transform: translate(-50%, -50%);
+        display: flex;
+    }
+
+   
+    .search-input {
+        width: 250px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px;
+        font-size: 14px;
+    }
+
+    .search-button {
+        padding: 8px 15px;
+        border: none;
+        background-color: #28a745;
+        color: white;
+        font-size: 14px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+    }
+
+    .search-button:hover {
+        background-color: #218838;
+    }
+
+   
+    @media (max-width: 768px) {
+        .search-bar-container {
+            position: relative; 
+            transform: none;
+            margin: 10px 0;
+        }
+        .search-input {
+            width: 70%; 
+        }
+    }
