@@ -310,6 +310,7 @@ if __name__ == '__main__':
 
 
 
+DATABASE_FILE = "vfm_database.db" 
 def get_db_connection():
     conn = sqlite3.connect(DATABASE_FILE)
     conn.row_factory = sqlite3.Row  # Enables column access by name
