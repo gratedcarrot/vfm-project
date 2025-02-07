@@ -300,12 +300,10 @@ def logout():
     session.clear()
     return jsonify({"success": True, "message": "Logged out successfully"})
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5001)  
-
 @app.errorhandler(500)
 def handle_internal_server_error(e):
     return jsonify({"success": False, "message": "Internal Server Error"}), 500
 
-app.run(debug=True, port=5001)
-
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5001))  # Get the port from Render, default to 5001 for local
+    app.run(host="0.0.0.0", port=port, debug=True)  # Single app.run()
