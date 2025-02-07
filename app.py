@@ -307,3 +307,30 @@ def handle_internal_server_error(e):
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5001))  # Get the port from Render, default to 5001 for local
     app.run(host="0.0.0.0", port=port, debug=True)  # Single app.run()
+
+
+
+def get_db_connection():
+    conn = sqlite3.connect(DATABASE_FILE)
+    conn.row_factory = sqlite3.Row  # Enables column access by name
+    return conn
+
+def initialize_database():
+    """Creates the reviews table if it doesn't exist"""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS reviews (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            product_id INTEGER,
+            review TEXT,
+            rating INTEGER
+        )
+    ''')
+    
+    conn.commit()
+    conn.close()
+
+initialize_database()  # Ensures table is created on startup
