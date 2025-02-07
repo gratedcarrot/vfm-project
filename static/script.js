@@ -17,14 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function fetchProducts(selectedCategories = []) {
-    let baseURL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-        ? "http://127.0.0.1:5001" // Use local Flask backend
-        : "https://vfm-project.onrender.com"; // Use deployed backend
+// Automatically detect whether the app is running locally or on Render
+const baseURL = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost" 
+    ? "http://127.0.0.1:5001" 
+    : "https://vfm-project.onrender.com";
 
+// Function to fetch products (works for both local and Render)
+function fetchProducts(selectedCategories = []) {
     let url = `${baseURL}/products`;
 
-    // Add query parameters for filtering
     if (selectedCategories.length > 0) {
         url += `?categories=${selectedCategories.join(',')}`;
     }
@@ -32,8 +33,8 @@ function fetchProducts(selectedCategories = []) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched products:", data); // Debug: Log fetched data
-            populateCatalog(data); // Populate the catalog
+            console.log("Fetched products:", data); // Debugging
+            populateCatalog(data);
         })
         .catch(error => console.error("Error fetching products:", error));
 }
@@ -52,7 +53,7 @@ function populateCatalog(products) {
         const productCard = `
             <div class="col-md-4">
                 <div class="card">
-                    <img src="http://127.0.0.1:5001/${product.image_path}" class="card-img-top" alt="${product.name}">
+                    <img src="${baseURL}/${product.image_path}" class="card-img-top" alt="${product.name}">
                     <div class="card-body">
                         <h5 class="card-title">${product.name}</h5>
                         <p class="card-text">Price/Kg: ₹${product.price}</p>
